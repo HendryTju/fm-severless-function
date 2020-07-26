@@ -54,7 +54,7 @@
   }
 </style>
 
-<h1>Movies, Floofed</h1>
+<h1>Valent dan Cici</h1>
 
 <div class="movies"></div>
 
@@ -78,41 +78,41 @@
 <script>
   function addScores(element, scores) {
     scores.forEach((score) => {
-      const item = document.createElement('li');
-      const label = document.createElement('span');
-      label.classList.add('source');
+      const item = document.createElement("li");
+      const label = document.createElement("span");
+      label.classList.add("source");
 
       // shorten the long name so the layout looks nice
       label.innerText =
-        score.Source === 'Internet Movie Database' ? 'IMDb' : score.Source;
+        score.Source === "Internet Movie Database" ? "IMDb" : score.Source;
       item.appendChild(label);
 
-      const value = document.createElement('span');
+      const value = document.createElement("span");
       value.innerText = score.Value;
       item.appendChild(value);
 
-      const scoreElement = element.querySelector('.scores');
+      const scoreElement = element.querySelector(".scores");
       scoreElement.appendChild(item);
     });
   }
 
   async function initialize() {
-    const movies = await fetch('/.netlify/functions/movies').then((response) =>
-      response.json(),
+    const movies = await fetch("/.netlify/functions/movies").then((response) =>
+      response.json()
     );
 
-    const container = document.querySelector('.movies');
-    const template = document.querySelector('#movie-template');
+    const container = document.querySelector(".movies");
+    const template = document.querySelector("#movie-template");
 
     movies.forEach((movie) => {
       const element = template.content.cloneNode(true);
 
-      const img = element.querySelector('img');
+      const img = element.querySelector("img");
       img.src = movie.poster;
       img.alt = movie.title;
 
-      element.querySelector('h2').innerText = movie.title;
-      element.querySelector('.tagline').innerText = movie.tagline;
+      element.querySelector("h2").innerText = movie.title;
+      element.querySelector(".tagline").innerText = movie.tagline;
 
       addScores(element, movie.scores);
 
